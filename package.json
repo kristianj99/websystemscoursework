@@ -1,0 +1,27 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kristianj99/websystemscoursework.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kristianj99/websystemscoursework/issues"
+  },
+  "homepage": "https://github.com/kristianj99/websystemscoursework#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.2.10",
+    "passport": "^0.5.2",
+    "passport-local-mongoose": "^7.0.0"
+  }
+}
