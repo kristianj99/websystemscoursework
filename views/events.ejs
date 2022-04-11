@@ -18,8 +18,24 @@
             <li><a href="/aboutus">About Us</a></li>
         </ul>    
     </div>
-    <div class="content">
+    <div class="eventcreation">
         <h1>Events</h1>
+        <form action="newevent" method=POST>
+            <input type="submit" value="New Event"></input>   
+        </form><br>
     </div>
-    
+    <div class ="eventslist">
+        <% if(data.events) { %>
+            <% data.events.forEach(function(event) { %>
+                Created by:<%= event.creator %><br>
+                Name: <%= event.name %><br>
+                Location: <%= event.location %><br>
+                Description: <%= event.about %><br>
+                Attending: <%= event.attendees %><br>
+                <form action ="addattendance" method="POST"><input type="submit" value="I'm attending">
+            <% }) %>    
+        <% } else { %>
+            <p>no events</p>
+        <% } %>
+    </div>
 </body>

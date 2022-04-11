@@ -18,23 +18,17 @@
             <li><a href="/aboutus">About Us</a></li>
         </ul>    
     </div>
-    <div class="commentsubmission">
-        <h1>Comments</h1>
-        <form action="/addcomment" method="POST">
-            <label for="comment">Add Comment:</label><br>
-            <input type="text" id="comment" name="comment"><br>
+    <div class="content">
+        <h1>New Event</h1>
+        <form action="/createevent" method="POST">
+            <label for="eventname">Event name:</label><br>
+            <input type="text" id="eventname" name="eventname"><br>
+            <label for="eventlocation">Event location:</label><br>
+            <input type="text" id="eventlocation" name="eventlocation"><br>
+            <label for="eventdesc">About the event:</label><br>
+            <input type="text" id="eventdesc" name="eventdesc"><br>
             <input type="submit" value="Submit">
         </form>
-    </div>
-    <div class="comments">
-        <% if(data.comments) { %>
-            <% data.comments.forEach(function(comment) { %>
-                <%= comment.username %> Says:<br>
-                <%= comment.comment %><br>
-            <% }) %>    
-        <% } else { %>
-            <p>no comments</p>
-        <% } %>
     </div>
     
 </body>

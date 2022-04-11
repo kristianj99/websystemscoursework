@@ -7,7 +7,8 @@ var express = require('express'),
     passportLocalMongoose =
         require("passport-local-mongoose"),
     User = require("./models/user");
-    Comment = require("./models/comments")
+    Comment = require("./models/comments");
+    Event = require("./models/event");
 const _ = require("passport-local-mongoose");
 var app = express();
 const path = require("path");
@@ -96,7 +97,11 @@ app.get("/profile", isLoggedIn, function (req,res) {
 });
 
 app.get("/comments", isLoggedIn, function (req,res) {
-    res.render("comments")
+    Comment.find((err, comments) => {
+        console.log(comments)
+        res.render("comments", {data: {comments:comments}});
+    })
+    
 });
 
 app.get("/aboutus", function (req,res) {
@@ -104,7 +109,14 @@ app.get("/aboutus", function (req,res) {
 });
 
 app.get("/events", isLoggedIn, function (req,res) {
-    res.render("events")
+    Event.find((err, events) => {
+        console.log(events)
+        res.render("events", {data: {events:events}});
+    })
+});
+
+app.post("/newevent", isLoggedIn, function (req,res) {
+    res.render("newevent")
 });
 
 app.get("/logout", function (req, res) {
@@ -118,9 +130,18 @@ app.post("/addcomment", (req,res) => {
         user_id: req.user._id,
         comment: req.body.comment
     })
-    res.render("comments")
+    res.redirect("comments")
 });
 
+app.post("/createevent", (req,res) => {
+    Event.create({
+        creator: req.user.username,
+        location: req.body.eventlocation,
+        name: req.body.eventname,
+        about: req.body.eventdesc
+    })
+    res.redirect("events")
+});
 
 //Handling user login
 app.post("/login", passport.authenticate("local", {
