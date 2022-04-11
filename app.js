@@ -119,9 +119,23 @@ app.post("/newevent", isLoggedIn, function (req,res) {
     res.render("newevent")
 });
 
+app.post("/addattendance/:id", isLoggedIn, function(req, res) {
+    console.log(req.params.id)
+    res.redirect("/")
+})
+
 app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/");
+});
+
+app.get("/userlist", isLoggedIn, function (req, res) {
+    console.log(req.user.isAdmin)
+    if (req.user.isAdmin != true) {
+        res.render("error")
+    } else {
+        res.render("userlist")
+    }
 });
 
 app.post("/addcomment", (req,res) => {
@@ -142,6 +156,7 @@ app.post("/createevent", (req,res) => {
     })
     res.redirect("events")
 });
+
 
 //Handling user login
 app.post("/login", passport.authenticate("local", {
