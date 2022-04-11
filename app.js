@@ -7,6 +7,7 @@ var express = require('express'),
     passportLocalMongoose =
         require("passport-local-mongoose"),
     User = require("./models/user");
+    Comment = require("./models/comments")
 const _ = require("passport-local-mongoose");
 var app = express();
 const path = require("path");
@@ -88,7 +89,39 @@ app.get("/login", function (req, res) {
     }
     res.render("login");
 });
- 
+
+app.get("/profile", isLoggedIn, function (req,res) {
+    username = req.user.username
+    res.render("profile", {data: {username : username}});
+});
+
+app.get("/comments", isLoggedIn, function (req,res) {
+    res.render("comments")
+});
+
+app.get("/aboutus", function (req,res) {
+    res.render("aboutus")
+});
+
+app.get("/events", isLoggedIn, function (req,res) {
+    res.render("events")
+});
+
+app.get("/logout", function (req, res) {
+    req.logout();
+    res.redirect("/");
+});
+
+app.post("/addcomment", (req,res) => {
+    Comment.create({
+        username: req.user.username,
+        user_id: req.user._id,
+        comment: req.body.comment
+    })
+    res.render("comments")
+});
+
+
 //Handling user login
 app.post("/login", passport.authenticate("local", {
     successRedirect: "/",

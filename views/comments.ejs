@@ -18,5 +18,15 @@
             <li><a href="/aboutus">About Us</a></li>
         </ul>    
     </div>
-    <p>Error logging in. Click <a href="/">here</a> to return to the home page.</p>
+    <div class="commentsubmission">
+        <h1>Comments</h1>
+        <form action="/addcomment" method="POST">
+            <label for="comment">Add Comment:</label><br>
+            <input type="text" id="comment" name="comment"><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="comments">
+    </div>
+    
 </body>
