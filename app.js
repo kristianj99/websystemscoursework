@@ -15,9 +15,9 @@ const path = require("path");
 
 var mongodb= require('mongodb');
 
-mongoose.connect("mongodb://localhost/websystemscoursework");
+mongoose.connect("mongodb+srv://admin:admin@cluster0.1eloq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
 
-conndb = mongoose.createConnection('mongodb://localhost/websystemscoursework');
+conndb = mongoose.createConnection('mongodb+srv://admin:admin@cluster0.1eloq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
 
 
 app.set("view engine", "ejs");
