@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+    <!--head and stylesheet-->
     <head>
         <title>Justice for Ugly Animals</title>
         <link href="css/style.css" rel="stylesheet" type="text/css" />
     </head>
 </html>
 <body>
+    <!--navbar-->
     <div class="navigation">
         <ul id="nav">
             <li><a href="/">Home</a></li>
@@ -19,8 +21,13 @@
             <li><a href="/userlist">User List</a></li>
         </ul>    
     </div>
-    <div class="content">
+    <!--title-->
+    <div class="title">
         <h1>New Event</h1>
+    </div>
+    <!--form to create event-->
+    <div class="content">
+        <!--takes in name, location, and description of event-->
         <form action="/createevent" method="POST">
             <label for="eventname">Event name:</label><br>
             <input type="text" id="eventname" name="eventname"><br>

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+    <!--head and stylesheet-->
     <head>
         <title>Justice for Ugly Animals</title>
         <link href="css/style.css" rel="stylesheet" type="text/css" />
     </head>
 </html>
 <body>
+    <!--navbar-->
     <div class="navigation">
         <ul id="nav">
             <li><a href="/">Home</a></li>
@@ -19,23 +21,31 @@
             <li><a href="/userlist">User List</a></li>
         </ul>    
     </div>
-    <div class="commentsubmission">
+    <!--title of page-->
+    <div class="title">
         <h1>Comments</h1>
+    </div>
+    <!--comment submission-->
+    <div class="commentsubmission">
+        <!--form to enter a comment-->
         <form action="/addcomment" method="POST">
             <label for="comment">Add Comment:</label><br>
             <input type="text" id="comment" name="comment"><br>
             <input type="submit" value="Submit">
         </form>
     </div>
+    <!--comments-->
     <div class="comments">
+        <!--looks for comments. if there are, displays each of them with the user name and the text-->
         <% if(data.comments) { %>
             <% data.comments.forEach(function(comment) { %>
                 <%= comment.username %> Says:<br>
-                <%= comment.comment %><br>
+                <%= comment.comment %><br><br><br>
             <% }) %>    
         <% } else { %>
             <p>no comments</p>
         <% } %>
+        <!--checks whether the user is an admin or not. if they are, it displays a button that will allow them to clear all comments.-->
         <% if(data.adminstatus == true) { %>
             <form action="clearcomments" method=POST>
                 <input type="submit" value="Clear all comments"></input>   

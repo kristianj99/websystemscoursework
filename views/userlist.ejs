@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+    <!--head and stylesheet-->
     <head>
         <title>Justice for Ugly Animals</title>
         <link href="css/style.css" rel="stylesheet" type="text/css" />
     </head>
 </html>
 <body>
+    <!--navbar-->
     <div class="navigation">
         <ul id="nav">
             <li><a href="/">Home</a></li>
@@ -19,9 +21,14 @@
             <li><a href="/userlist">User List</a></li>
         </ul>    
     </div>
-    <div class="content">
+    <!--title-->
+    <div class="title">
         <h1>User List</h1><br>
+    </div>
+    <!--user list-->
+    <div class="userlist">
         <p>Below is a current list of all the users on the site.</p><br>
+        <!--checks if there are users. if they are, displays their usernames in a list-->
         <% if(data.users) { %>
             <% data.users.forEach(function(user) { %>
                 <%= user.username %><br>

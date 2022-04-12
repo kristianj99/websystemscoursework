@@ -42,3 +42,33 @@ color: black;
 border: 10px ;
 border-color: black;
 }
+
+body {
+background-color: lightgrey;
+}
+
+.content{
+font-size: 17px;
+}
+
+.comments {
+display: inline-block;
+padding-top: 30px;
+padding-left: 20px;
+}
+
+.eventslist {
+	display: inline-block;
+	padding-top: 30px;
+	padding-left: 20px;
+	}
+	
+.userlist {
+	display: inline-block;
+	padding-top: 30px;
+	padding-left: 20px;
+}
+
+.title {
+text-align: center;
+}

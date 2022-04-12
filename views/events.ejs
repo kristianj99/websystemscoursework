@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+    <!--head and stylesheet-->
     <head>
         <title>Justice for Ugly Animals</title>
         <link href="css/style.css" rel="stylesheet" type="text/css" />
     </head>
 </html>
 <body>
+    <!--navbar-->
     <div class="navigation">
         <ul id="nav">
             <li><a href="/">Home</a></li>
@@ -19,13 +21,20 @@
             <li><a href="/userlist">User List</a></li>
         </ul>    
     </div>
-    <div class="eventcreation">
+    <!--title-->
+    <div class="title">
         <h1>Events</h1>
+    </div>
+    <!--create an event-->
+    <div class="eventcreation">
+        <!--form linking to the event creation page-->
         <form action="newevent" method=POST>
             <input type="submit" value="New Event"></input>   
         </form><br>
     </div>
+    <!--list of events-->
     <div class ="eventslist">
+        <!--checks to see if there are events. if there are, it displays them all, as well as a button to attend the event-->
         <% if(data.events) { %>
             <% data.events.forEach(function(event) { %>
                 Created by:<%= event.creator %><br>
@@ -38,6 +47,7 @@
         <% } else { %>
             <p>no events</p>
         <% } %><br><br>
+        <!--checks if the user is an admin. if they are, it displays a button to clear all of the events in the database-->
         <% if(data.adminstatus == true) { %>
             <form action="clearevents" method=POST>
                 <input type="submit" value="Clear all events"></input>   

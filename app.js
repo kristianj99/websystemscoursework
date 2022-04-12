@@ -25,9 +25,9 @@ conndb = mongoose.createConnection('mongodb+srv://admin:admin@cluster0.1eloq.mon
 app.set("view engine", "ejs");
 //tells the app to use bodyparser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 //tells the app to use methodoverride
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
 //tells the app to require using express
 app.use(require("express-session")({
     secret: "Rusty is a dog",
@@ -54,7 +54,7 @@ app.get("/", function (req, res) {
 app.get("/register", function (req, res) {
     //if the user is already logged in, then the website sends a register error. otherwise, it sends the user to the register page
     if (req.isAuthenticated()) {
-        return res.render("registererror")
+        return res.render("registererror");
     }
     res.render("register");
 });
@@ -72,8 +72,8 @@ app.get("/loginerror", function (req, res) {
 //handles the user registering an account
 app.post("/register", function (req, res) {
     //takes the input of username and password from the user
-    var username = req.body.username
-    var password = req.body.password
+    var username = req.body.username;
+    var password = req.body.password;
     //creates an account for the user using the variables declared previously. if there is an error, the register error page is loaded.
     User.register(new User({ username: username }),
             password, function (err, user) {
@@ -93,7 +93,7 @@ app.post("/register", function (req, res) {
 app.get("/login", function (req, res) {
     //checks to see if the user is already logged in. if they are, login error page is displayed. if not, the login page is displayed
     if (req.isAuthenticated()) {
-        return res.render("loginerror")
+        return res.render("loginerror");
     }
     res.render("login");
 });
@@ -118,21 +118,21 @@ app.get("/comments", isLoggedIn, function (req,res) {
 
 app.post("/clearcomments", isLoggedIn, function(req, res) {
     Comment.remove(function (err) {
-        console.log("worked")
+        console.log("worked");
     });
-    res.redirect("comments")
+    res.redirect("comments");
 })
 
 app.post("/clearevents", isLoggedIn, function(req, res) {
     Event.remove(function (err) {
-        console.log("worked")
+        console.log("worked");
     });
-    res.redirect("events")
+    res.redirect("events");
 })
 
 //loads the about us page
 app.get("/aboutus", function (req,res) {
-    res.render("aboutus")
+    res.render("aboutus");
 });
 
 //loads the events page
@@ -142,32 +142,32 @@ app.get("/events", isLoggedIn, function (req,res) {
     //finds all the events in the database, and renders the page with them
     Event.find((err, events) => {
         res.render("events", {data: {events:events, adminstatus:adminstatus}});
-    })
+    });
 });
 
 //loads the new event page
 app.post("/newevent", isLoggedIn, function (req,res) {
-    res.render("newevent")
+    res.render("newevent");
 });
 
 app.post("/changeusername", isLoggedIn, function (req,res) {
-    res.render("changeusername")
+    res.render("changeusername");
 });
 
 app.post("/editusername", isLoggedIn, function (req,res) {
     User.findOneAndUpdate({_id:req.user._id},{$set: {username:req.body.nameedit}}, {returnNewDocument: true}, function(err, result) {
-        console.log(result)
+        console.log(result);
     });
-    res.redirect("profile")
+    res.redirect("profile");
 });
 
 //adds a users name to the attendance of the event
 app.post("/addattendance/:id", isLoggedIn, function(req, res) {
     //finds the event that was clicked, and adds the users name to the array of attendees
     Event.findOneAndUpdate({_id:mongoose.Types.ObjectId(req.params.id)},{$push: {attendees: req.user.username}}, {returnNewDocument: true}, function(err, result) {
-        console.log(result)
+        console.log(result);
     });    
-    res.redirect("/")
+    res.redirect("/");
 })
 
 //logs the user out of their account, then redirects them to the home page
@@ -180,14 +180,14 @@ app.get("/logout", function (req, res) {
 app.get("/userlist", isLoggedIn, function (req, res) {
     //checks if the user is an admin or not. if not, it loads an error page. if they pass, the user list is rendered
     if (req.user.isAdmin != true) {
-        res.render("error")
+        res.render("error");
     } else {
         //finds all the users in the database and renders them with the page
         User.find((err,users) => {
             res.render("userlist", {data: {users:users}});
-        })
+        });
         
-    }
+    };
 });
 
 
@@ -198,8 +198,8 @@ app.post("/addcomment", (req,res) => {
         username: req.user.username,
         user_id: req.user._id,
         comment: req.body.comment
-    })
-    res.redirect("comments")
+    });
+    res.redirect("comments");
 });
 
 //creates an event
@@ -210,8 +210,8 @@ app.post("/createevent", (req,res) => {
         location: req.body.eventlocation,
         name: req.body.eventname,
         about: req.body.eventdesc
-    })
-    res.redirect("events")
+    });
+    res.redirect("events");
 });
 
 
@@ -228,7 +228,7 @@ function isLoggedIn(req, res, next) {
     //if they pass, they are sent to the page expected. if they fail, they are redirected to the login page
     if (req.isAuthenticated()) return next();
     res.redirect("/login");
-}
+};
 
 //logs in the console when the server has started
 var port = process.env.PORT || 8080;

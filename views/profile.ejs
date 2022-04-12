@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+    <!--head and stylesheet-->
     <head>
         <title>Justice for Ugly Animals</title>
         <link href="css/style.css" rel="stylesheet" type="text/css" />
     </head>
 </html>
 <body>
+    <!--navbar-->
     <div class="navigation">
         <ul id="nav">
             <li><a href="/">Home</a></li>
@@ -19,8 +21,13 @@
             <li><a href="/userlist">User List</a></li>
         </ul>    
     </div>
-    <div class="content">
+    <!--title-->
+    <div class="title">
         <h1>Profile</h1>
+    </div>
+    <!--displaying user profile-->
+    <div class="content">
+        <!--displays username with option to change it-->
         <p id="username">Username: <%= data.username%></p><form action="changeusername" method=POST><input type="submit" value="Edit Username"></input> </form><br><br>
     </div>
     
