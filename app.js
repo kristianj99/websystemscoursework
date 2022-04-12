@@ -134,7 +134,10 @@ app.get("/userlist", isLoggedIn, function (req, res) {
     if (req.user.isAdmin != true) {
         res.render("error")
     } else {
-        res.render("userlist")
+        User.find((err,users) => {
+            res.render("userlist", {data: {users:users}});
+        })
+        
     }
 });
 
