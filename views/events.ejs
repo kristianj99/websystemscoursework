@@ -33,10 +33,15 @@
                 Location: <%= event.location %><br>
                 Description: <%= event.about %><br>
                 Attending: <%= event.attendees %><br>
-                <form action ="addattendance/<%= event._id %>?_method=POST" method="POST"><input type="submit" value="I'm attending"><br>
+                <form action ="addattendance/<%= event._id %>?_method=POST" method="POST"><input type="submit" value="I'm attending"></form><br>
             <% }) %>    
         <% } else { %>
             <p>no events</p>
+        <% } %><br><br>
+        <% if(data.adminstatus == true) { %>
+            <form action="clearevents" method=POST>
+                <input type="submit" value="Clear all events"></input>   
+            </form><br> 
         <% } %>
     </div>
 </body>

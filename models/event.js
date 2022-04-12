@@ -5,7 +5,7 @@ var schema = new Schema({
     location: String,
     name: String,
     about: String,
-    attendees: [{username: String}]
+    attendees: Array
 });
 
 

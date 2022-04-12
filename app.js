@@ -108,7 +108,7 @@ app.get("/profile", isLoggedIn, function (req,res) {
 //loads the comments page
 app.get("/comments", isLoggedIn, function (req,res) {
     //checks whether the user has admin status or not
-    var adminstatus = req.user.isAdmin
+    var adminstatus = req.user.isAdmin;
     //finds all the comments in the database, and renders the comments page with them
     Comment.find((err, comments) => {
         res.render("comments", {data: {comments:comments, adminstatus:adminstatus}});
@@ -123,6 +123,13 @@ app.post("/clearcomments", isLoggedIn, function(req, res) {
     res.redirect("comments")
 })
 
+app.post("/clearevents", isLoggedIn, function(req, res) {
+    Event.remove(function (err) {
+        console.log("worked")
+    });
+    res.redirect("events")
+})
+
 //loads the about us page
 app.get("/aboutus", function (req,res) {
     res.render("aboutus")
@@ -130,9 +137,11 @@ app.get("/aboutus", function (req,res) {
 
 //loads the events page
 app.get("/events", isLoggedIn, function (req,res) {
+    //checks whether the user has admin status or not
+    var adminstatus = req.user.isAdmin;
     //finds all the events in the database, and renders the page with them
     Event.find((err, events) => {
-        res.render("events", {data: {events:events}});
+        res.render("events", {data: {events:events, adminstatus:adminstatus}});
     })
 });
 
@@ -141,9 +150,30 @@ app.post("/newevent", isLoggedIn, function (req,res) {
     res.render("newevent")
 });
 
+app.post("/changeusername", isLoggedIn, function (req,res) {
+    res.render("changeusername")
+});
+
+app.post("/editusername", isLoggedIn, function (req,res) {
+    User.findOneAndUpdate({_id:req.user._id},{$set: {username:req.body.nameedit}}, {returnNewDocument: true}, function(err, result) {
+        console.log(result)
+    });
+    res.redirect("profile")
+});
+
 //currently broken - plans to add attendance to an event, however id only returns id of first event currently
 app.post("/addattendance/:id", isLoggedIn, function(req, res) {
-    console.log(req.params.id)
+    //Event.updateOne(
+    //    {"_id":mongoose.Types.ObjectId(req.params.id)},
+    //     {"$push": {
+    //         "attendees": {
+    //              "username": req.user.username}}, function(err) {
+    //                    console.log("worked")
+    //}});
+    //res.redirect("/")
+    Event.findOneAndUpdate({_id:mongoose.Types.ObjectId(req.params.id)},{$push: {attendees: req.user.username}}, {returnNewDocument: true}, function(err, result) {
+        console.log(result)
+    });
     res.redirect("/")
 })
 
@@ -166,6 +196,7 @@ app.get("/userlist", isLoggedIn, function (req, res) {
         
     }
 });
+
 
 //creates a comment
 app.post("/addcomment", (req,res) => {
