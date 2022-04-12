@@ -101,7 +101,7 @@ app.get("/login", function (req, res) {
 //loads the users profile
 app.get("/profile", isLoggedIn, function (req,res) {
     //checks the users name, and displays it on the profile
-    username = req.user.username
+    username = req.user.username;
     res.render("profile", {data: {username : username}});
 });
 
@@ -161,19 +161,12 @@ app.post("/editusername", isLoggedIn, function (req,res) {
     res.redirect("profile")
 });
 
-//currently broken - plans to add attendance to an event, however id only returns id of first event currently
+//adds a users name to the attendance of the event
 app.post("/addattendance/:id", isLoggedIn, function(req, res) {
-    //Event.updateOne(
-    //    {"_id":mongoose.Types.ObjectId(req.params.id)},
-    //     {"$push": {
-    //         "attendees": {
-    //              "username": req.user.username}}, function(err) {
-    //                    console.log("worked")
-    //}});
-    //res.redirect("/")
+    //finds the event that was clicked, and adds the users name to the array of attendees
     Event.findOneAndUpdate({_id:mongoose.Types.ObjectId(req.params.id)},{$push: {attendees: req.user.username}}, {returnNewDocument: true}, function(err, result) {
         console.log(result)
-    });
+    });    
     res.redirect("/")
 })
 
