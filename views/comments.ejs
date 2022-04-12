@@ -36,6 +36,11 @@
         <% } else { %>
             <p>no comments</p>
         <% } %>
+        <% if(data.adminstatus == true) { %>
+            <form action="clearcomments" method=POST>
+                <input type="submit" value="Clear all comments"></input>   
+            </form><br> 
+        <% } %>
     </div>
     
 </body>
